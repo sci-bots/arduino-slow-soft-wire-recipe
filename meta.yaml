@@ -3,7 +3,11 @@ source:
 
 package:
   name: arduino-slow-soft-wire
-  version: 1.0.0
+{% if GIT_DESCRIBE_NUMBER > '0' %}
+  version: {{ GIT_DESCRIBE_TAG[1:] }}.post{{ GIT_DESCRIBE_NUMBER }}
+{% else %}
+  version: {{ GIT_DESCRIBE_TAG[1:] }}.0
+{% endif %}
 
 build:
   # If this is a new build for the same version, increment the build
@@ -13,3 +17,7 @@ build:
 requirements:
   run:
     - arduino-slow-soft-i2c-master
+
+about:
+  home: https://github.com/sci-bots/SlowSoftWire
+  license: LGPL
