@@ -1,23 +1,32 @@
+{% set PKG_NAME = 'arduino-slow-soft-wire' %}
+{% set LIB_NAME = 'SlowSoftWire' %}
+{% set VERSION = '1.0.1' %}
 source:
-  git_url: https://github.com/sci-bots/SlowSoftWire
+  url: https://github.com/sci-bots/{{ LIB_NAME }}/archive/v{{ VERSION }}.tar.gz
 
 package:
-  name: arduino-slow-soft-wire
-{% if GIT_DESCRIBE_NUMBER > '0' %}
-  version: {{ GIT_DESCRIBE_TAG[1:] }}.post{{ GIT_DESCRIBE_NUMBER }}
-{% else %}
-  version: {{ GIT_DESCRIBE_TAG[1:] }}.0
-{% endif %}
+  name: {{ PKG_NAME }}
+  version: {{ VERSION }}
 
 build:
   # If this is a new build for the same version, increment the build
   # number. If you do not include this key, it defaults to 0.
-  number: 0
+  number: 1
+  script:
+    python -c
+      "import os.path; import os; import shutil;
+      install_dir = os.path.join(os.environ['PREFIX'],
+                                 'Library',  # [win]
+                                 'include', 'Arduino', '{{ LIB_NAME }}');
+      shutil.copytree(os.environ['SRC_DIR'], install_dir);
+      os.remove(os.path.join(install_dir, 'bld.bat'));  # [win]
+      os.remove(os.path.join(install_dir, 'build.sh'));  # [not win]
+      "
 
 requirements:
-  run:
-    - arduino-slow-soft-i2c-master
+  build:
+    - python
 
 about:
-  home: https://github.com/sci-bots/SlowSoftWire
+  home: https://github.com/sci-bots/{{ LIB_NAME }}
   license: LGPL
