@@ -26,7 +26,7 @@ build:
 
 requirements:
   build:
-    - platformio-helpers
+    - platformio-helpers >=0.6
     - python
 
   run:
