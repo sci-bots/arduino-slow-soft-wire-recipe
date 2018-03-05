@@ -3,6 +3,7 @@
 {% set VERSION = '1.0.1' %}
 source:
   url: https://github.com/sci-bots/{{ LIB_NAME }}/archive/v{{ VERSION }}.tar.gz
+  fn: {{ LIB_NAME }}-v{{ VERSION }}.tar.gz
 
 package:
   name: {{ PKG_NAME }}
@@ -11,7 +12,7 @@ package:
 build:
   # If this is a new build for the same version, increment the build
   # number. If you do not include this key, it defaults to 0.
-  number: 4
+  number: 5
   noarch: generic
   script:
     python -c
