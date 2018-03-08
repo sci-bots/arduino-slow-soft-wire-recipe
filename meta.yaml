@@ -26,11 +26,11 @@ build:
 
 requirements:
   build:
-    - platformio-helpers >=0.6
+    - platformio-helpers >=0.7
     - python
 
   run:
-    - arduino-slow-soft-i2c-master
+    - arduino-slow-soft-i2c-master >=1.0.1
 
 about:
   home: https://github.com/sci-bots/{{ LIB_NAME }}
